@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/controller/global_controller.dart';
 import 'package:weather/sharedPrefs/app_shared_prefences.dart';
+import 'package:weather/view/splash/splash_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const route = '/home';
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          TextButton(onPressed: ()=>Get.back(), child: const Text("Back",style: TextStyle(color: Colors.white),),),
+          TextButton(onPressed: ()=>Get.toNamed(SplashScreen.route), child: const Text("Back",style: TextStyle(color: Colors.white),),),
         ],
       ),
       body: SafeArea(
