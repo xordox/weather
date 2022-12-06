@@ -12,11 +12,22 @@ class AppSharedPreferences{
     await _preferences.setBool("skip", true);    
   }
 
+  Future<void> saveCity (String val) async {
+    await _preferences.setString("city", val);    
+  }
+
   static bool getSkipInfo(){
     late bool skipInfo;
     skipInfo = _preferences.getBool("skip")??false;
     print("SkipInfoVal: $skipInfo");
     return skipInfo;
+  }
+
+  static String getCityInfo(){
+    late String cityInfo;
+    cityInfo = _preferences.getString("city")??"";
+    print("cityInfoVal: $cityInfo");
+    return cityInfo;
   }
   
   static void clearPrefs(){

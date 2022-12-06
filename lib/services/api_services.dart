@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:weather/const/api_key.dart';
 import 'package:weather/model/weather_model.dart';
 import 'package:http/http.dart'as http;
@@ -16,7 +14,7 @@ class ApiServices{
     return url;
   }
 
-  String apiCityURL(var city) {
+  String apiCityURL(String city) {
     String url;
     url ="$baseUrl&q=$city";
     return url;
@@ -26,15 +24,16 @@ class ApiServices{
     var response = await http.get(Uri.parse(apiURL(lat, lon)));
     var jsonString = jsonDecode(response.body);
     weatherModel = WeatherModel.fromJson(jsonString);
-    log("WeatherModel from api $weatherModel");
+    print("WeatherModel from api $weatherModel");
     return weatherModel!;
   }
 
   Future<WeatherModel> fetchCityWeather(String city) async {
     var response = await http.get(Uri.parse(apiCityURL(city)));
     var jsonString = jsonDecode(response.body);
+    print(response.body);
     weatherModel = WeatherModel.fromJson(jsonString);
-    log("WeatherModel2 from api $weatherModel");
+    print("WeatherModel2 from api $weatherModel");
     return weatherModel!;
   }
 

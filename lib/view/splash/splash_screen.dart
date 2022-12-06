@@ -15,7 +15,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final GlobalController globalController = Get.find<GlobalController>();
-  //bool isLoggedIn = TokenSharedPreferences().token;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         "We show weather for you",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
+                          fontSize: 20,
                         ),
                       ),
                       ElevatedButton(onPressed: (){ 
@@ -71,7 +70,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    //TokenSharedPreferences.clearToken();
     goToHomeScreen();
     super.initState();
   }
@@ -79,32 +77,5 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void>goToHomeScreen() async {
     Future.delayed(const Duration(seconds: 5), ()=> Get.toNamed(HomeScreen.route));
   }
-  // Future<void> userStatus() async {
-  //   // Future.delayed(Duration.zero,(){
-  //   //   isLoggedIn =true;
-  //   // });
-
-  //   if (isLoggedIn) {
-  //     final user = await _userController.getProfile();
-  //     if (user != null) {
-  //       Future.delayed(Duration.zero, () {
-  //         Get.offNamed(DashboardOneScreen.route);
-  //       });
-  //     } else {
-  //       Future.delayed(Duration.zero, () {
-  //         Get.offNamed(LoginScreen.route);
-  //       });
-  //     }
-  //     // WidgetsBinding.instance.addPostFrameCallback((_) {
-
-  //     //});
-  //   } else {
-  //     // WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     Future.delayed(Duration.zero, () {
-  //       Get.offNamed(LoginScreen.route);
-  //     });
-  //     //});
-  //   }
-  // }
 
 }

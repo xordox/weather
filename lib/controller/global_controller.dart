@@ -10,15 +10,26 @@ class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;
   final RxDouble _latitude = 0.0.obs;
   final RxDouble _longitude = 0.0.obs;
+  final RxString _city = ''.obs;
+  final RxString _cityApi = ''.obs;
 
   RxBool checkLoading() => _isLoading;
   RxDouble getLattitude() => _latitude;
   RxDouble getLongitude() => _longitude;
+  RxString get getCity => _city;
+  RxString get getCityApi => _cityApi;
 
   final weatherData = WeatherData().obs;
-  late WeatherModel weatherModel;
+  Rx<WeatherModel> weatherModel = WeatherModel().obs;
 
-  WeatherModel get getWeather => weatherModel;
+  Rx<WeatherModel> get getWeather => weatherModel;
+
+
+  setCity(String city){
+    _city.value = city;
+  }
+
+  
 
 
 
@@ -62,7 +73,7 @@ class GlobalController extends GetxController {
       return ApiServices()
           .fetchWeather(value.latitude, value.longitude)
           .then((val) {
-        weatherModel = val;
+        weatherModel.value = val;
         _isLoading.value = false;
         update();
       });
@@ -70,12 +81,14 @@ class GlobalController extends GetxController {
   }
 
   Future<void> fetchCityWeather(String city) async {    
+    log("cityName: $city");
         _isLoading.value = true;
     await ApiServices()
           .fetchCityWeather(city)
           .then((val) {
-        weatherModel = val;
-        log("city data: $val");
+        weatherModel.value = val;
+         _city.value = val.location!.name;
+         _cityApi.value = val.location!.name;
         _isLoading.value = false;
         update();
       });

@@ -6,12 +6,12 @@ String weatherModelToJson(WeatherModel data) => json.encode(data.toJson());
 
 class WeatherModel {
     WeatherModel({
-        required this.location,
-        required this.current,
+         this.location,
+         this.current,
     });
 
-    Location location;
-    Current current;
+    Location? location;
+    Current? current;
 
     factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
         location: Location.fromJson(json["location"]),
@@ -19,8 +19,8 @@ class WeatherModel {
     );
 
     Map<String, dynamic> toJson() => {
-        "location": location.toJson(),
-        "current": current.toJson(),
+        "location": location?.toJson(),
+        "current": current?.toJson(),
     };
 }
 
