@@ -91,16 +91,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
                         width: 200,
                         child: TextFormField(
+                          decoration: const InputDecoration(
+                        hintText :"Enter location",
+                      ),
                           controller: _controller,                          
                         ),
                       ),
                       ElevatedButton(onPressed: ()async{
-                        AppSharedPreferences().saveCity(_controller.text);
-                        await globalController.fetchCityWeather(_controller.text);
+                        if(_controller.text.isEmpty){
+                          Get.snackbar("Location is empty", "");
+                        }
+                        else{AppSharedPreferences().saveCity(_controller.text);
+                        await globalController.fetchCityWeather(_controller.text);}
                         },
                          child: _controller.text.isEmpty? const Text("Save"): const Text("Update"))
                     ],
